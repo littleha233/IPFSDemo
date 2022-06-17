@@ -69,7 +69,8 @@ public class IPFSBasic {
         return checkFile.getAbsolutePath();
     }
 
-    //根据输入输出哈希
+    // 根据输入输出哈希
+    // 该哈希值用于对文件命名
     public static String getHash(String str) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance( "SHA-256" );
         // Change this to UTF-16 if needed
@@ -89,10 +90,15 @@ public class IPFSBasic {
     public static String IPFStorage(String content) throws IOException, NoSuchAlgorithmException {
         String path = createFile(content);
         String ipfsHash = add(path);
-        System.out.println("IPFSHASH: "+ipfsHash);
+        System.out.println("IPFS Hash: "+ipfsHash);
         return ipfsHash;
     }
 
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+        String hash = IPFStorage("0616 test");
+        String content = cat(hash);
+        System.out.println(content);
 
+    }
 
 }
